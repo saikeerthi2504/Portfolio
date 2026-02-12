@@ -1,0 +1,226 @@
+/* Floating Profile Button */
+.profile-floating-btn {
+  position: fixed;
+  background: linear-gradient(45deg, #e100ff, #00d0ff);
+  padding: 5px;
+  border: 3px solid #fff3;
+  border-radius: 50%;
+  color: white;
+  overflow: hidden;
+  /* top: 20px;
+  left: 20px;
+  width: 70px;
+  height: 70px;
+  
+  
+  cursor: pointer;
+  
+  
+  z-index: 2000;
+  transition: 0.3s; */
+}
+
+.profile-floating-btn img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Sidebar Container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -400px; /* Hidden initially */
+  width: 350px;
+  height: 100%;
+  background: rgba(15, 18, 35, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  color: white;
+  transition: 0.4s ease;
+  z-index: 3000;
+  overflow-y: auto;
+  border-right: 1px solid #ffffff22;
+}
+
+/* When Open */
+.sidebar.open {
+  left: 0;
+}
+
+/* Close Button */
+.close-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  float: right;
+  cursor: pointer;
+}
+
+/* Profile Image Big */
+.profile-image-big {
+  width: 140px;
+  height: 140px;
+  margin: 20px auto;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(45deg, #e100ff, #00d0ff);
+}
+
+.profile-image-big img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+h2 {
+  text-align: center;
+}
+
+.subtext {
+  text-align: center;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* Section Titles */
+.section-title {
+  margin-top: 20px;
+  font-size: 18px;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+/* Contact rows */
+.row {
+  margin: 8px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Skill Bars */
+.skill {
+  margin: 15px 0;
+}
+
+.skill span {
+  display: inline-block;
+  width: 50%;
+}
+
+.bar {
+  width: 100%;
+  height: 6px;
+  background: #222;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.fill {
+  height: 100%;
+  background: gold;
+  border-radius: 4px;
+}
+/* Knowledge List */
+.knowledge-list {
+  margin-top: 10px;
+  padding-left: 10px;
+  list-style: none;
+  margin-bottom: 60px;
+}
+
+.knowledge-list li {
+  margin: 8px 0;
+  font-size: 15px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+}
+
+.knowledge-list li::before {
+  content: "• ";
+  color: gold;
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+/* 📱 Tablets & Mobile */
+@media (max-width: 768px) {
+
+  /* Floating Profile Button */
+  .profile-floating-btn {
+    top: 15px;
+    left: 15px;
+    width: 55px;
+    height: 55px;
+    padding: 4px;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 85%;           /* responsive width */
+    max-width: 320px;
+    padding: 20px;
+    left: -100%;          /* fully hidden */
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Profile Image */
+  .profile-image-big {
+    width: 110px;
+    height: 110px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .subtext {
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .row {
+    font-size: 13px;
+  }
+
+  .knowledge-list li {
+    font-size: 14px;
+  }
+}
+
+/* 📱 Small Mobiles */
+@media (max-width: 480px) {
+
+  .profile-floating-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sidebar {
+    width: 100%;      /* full screen sidebar */
+    max-width: 100%;
+    padding: 18px;
+  }
+
+  .profile-image-big {
+    width: 100px;
+    height: 100px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .knowledge-list li {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* space between image and text */
+  padding-left: 220px;
+  color: white;
+ 
+}
+
+.image{
+    width: 200px;
+    height: 300px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px grey;
+    margin-top: 50px;
+    
+}
+
+/* .content h1 {
+  margin: 0;
+} */
+
+.content p {
+  max-width: 400px;
+}
+.social-icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  font-size: 30px;
+}
+
+.social-icons a {
+  color: white;
+  transition: 0.2s;
+}
+
+.social-icons a:hover {
+  color: #0077ff; /* change color on hover */
+  
+  
+  
+}
+/* 📱 Tablets & Mobile */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;      /* stack image & text */
+    align-items: center;
+    padding-left: 0;             /* remove desktop padding */
+    text-align: center;
+    gap: 15px;
+  }
+
+  .image {
+    width: 180px;
+    height: 260px;
+    margin-top: 20px;
+  }
+
+  .content p {
+    max-width: 90%;
+    font-size: 14px;
+  }
+
+  .social-icons {
+    justify-content: center;
+    font-size: 26px;
+  }
+}
+
+/* 📱 Small Mobiles */
+@media (max-width: 480px) {
+
+  .image {
+    width: 150px;
+    height: 220px;
+    border-radius: 20px;
+  }
+
+  .content p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .social-icons {
+    font-size: 24px;
+    gap: 12px;
+  }
+}
