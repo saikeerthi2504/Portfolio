@@ -1,85 +1,130 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  FaPhone, FaEnvelope, FaLinkedin, FaGithub,
+} from "react-icons/fa";
 import "./ProfileSidebar.css";
 
+/* ─── DATA ─── */
+const CONTACT = [
+  { icon: <FaPhone />,    label: "Phone",    value: "+91 7702062390"               },
+  { icon: <FaEnvelope />, label: "Email",    value: "saikeerthinarasimha@gmail.com" },
+  { icon: <FaLinkedin />, label: "LinkedIn", value: "saikeerthiChittamuri"          },
+  { icon: <FaGithub />,   label: "GitHub",   value: "Saikeerthi2504"                },
+];
+
+const SKILLS = [
+  { name: "Java",        pct: 95 },
+  { name: "React JS",    pct: 85 },
+  { name: "JavaScript",  pct: 75 },
+  { name: "MySQL",       pct: 80 },
+  { name: "Spring Boot", pct: 70 },
+  { name: "HTML / CSS",  pct: 70 },
+  { name: "AWS",         pct: 70 },
+];
+
+const KNOWLEDGE = [
+  "Programming Fundamentals",
+  "Object-Oriented Programming (OOP)",
+  "REST API Development",
+  "Database Management (SQL)",
+  "Cloud Deployment Basics (AWS)",
+  "Git & GitHub Usage",
+  "Debugging & Problem Solving",
+];
+
+/* ─── COMPONENT ─── */
 const ProfileSidebar = () => {
   const [open, setOpen] = useState(false);
 
+  /* Lock body scroll when sidebar open */
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   return (
     <>
-      {/* Floating Profile Button */}
+      {/* ── Floating trigger ── */}
       <div className="profile-floating-btn" onClick={() => setOpen(true)}>
-        {/* <img src="/me.jpg" alt="profile" /> */}☰
+        ☰
       </div>
 
-      {/* Sidebar */}
-      <div className={`sidebar ${open ? "open" : ""}`}>
-        
-        <button className="close-btn" onClick={() => setOpen(false)}>×</button>
+      {/* ── Backdrop overlay ── */}
+      <div
+        className={`sidebar-overlay ${open ? "visible" : ""}`}
+        onClick={() => setOpen(false)}
+      />
 
+      {/* ══════════════ SIDEBAR PANEL ══════════════ */}
+      <aside className={`sidebar ${open ? "open" : ""}`}>
+
+        {/* Close */}
+        <button className="close-btn" onClick={() => setOpen(false)} aria-label="Close sidebar">
+          ×
+        </button>
+
+        {/* ── Profile Photo ── */}
         <div className="profile-image-big">
-          <img src="/saikeerthiprofileee.jpg" alt="profile" />
+          <img src="/saikeerthiprofileee.jpg" alt="Ch Sai Keerthi" />
         </div>
 
-        <h2>Ch Saikeerthi</h2>
+        {/* ── Name & Sub ── */}
+        <h2>Ch Sai Keerthi</h2>
         <p className="subtext">
-           B.Tech(CSE) in <br /> Priyadarsini College, Nellore
+          B.Tech (CSE) <br />
+          Priyadarsini College, Nellore
         </p>
+        <div className="status-pill">
+          <span className="status-dot" />
+          Open to Work
+        </div>
 
+        <div className="sidebar-divider" />
+
+        {/* ══ CONTACT ══ */}
         <div className="section-title">Contact</div>
+        <div className="contact-block">
+          {CONTACT.map((c) => (
+            <div className="row" key={c.label}>
+              <span className="row-icon">{c.icon}</span>
+              <div className="row-content">
+                <span className="row-label">{c.label}</span>
+                <span className="row-value">{c.value}</span>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <p className="row"><strong>Contact:</strong> +91 7702062390</p>
-        <p className="row"><strong>Email:</strong> saikeerthinarasimha@gmail.com</p>
-        <p className="row"><strong>LinkedIn:</strong> saikeerhtiChittamuri</p>
-        <p className="row"><strong>Github:</strong> Saikeerthi2504</p>
-
+        {/* ══ SKILLS ══ */}
         <div className="section-title">Skills</div>
-
-        <div className="skill">
-          <span>React Js</span> <span>85%</span>
-          <div className="bar"><div className="fill" style={{ width: "85%" }}></div></div>
+        <div className="skills-block">
+          {SKILLS.map((s) => (
+            <div className="skill" key={s.name}>
+              <div className="skill-header">
+                <span className="skill-name">{s.name}</span>
+                <span className="skill-pct">{s.pct}%</span>
+              </div>
+              <div className="bar">
+                <div className="fill" style={{ width: `${s.pct}%` }} />
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="skill">
-          <span>HTML / CSS</span> <span>70%</span>
-          <div className="bar"><div className="fill" style={{ width: "70%" }}></div></div>
-        </div>
-
-        <div className="skill">
-          <span>JavaScript</span> <span>75%</span>
-          <div className="bar"><div className="fill" style={{ width: "75%" }}></div></div>
-        </div>
-
-        <div className="skill">
-          <span>Java</span> <span>95%</span>
-          <div className="bar"><div className="fill" style={{ width: "95%" }}></div></div>
-        </div>
-
-        <div className="skill">
-          <span>SpringBoot</span> <span>70%</span>
-          <div className="bar"><div className="fill" style={{ width: "70%" }}></div></div>
-        </div>
-        <div className="skill">
-          <span>MySQL</span> <span>80%</span>
-          <div className="bar"><div className="fill" style={{ width: "80%" }}></div></div>
-        </div>
-        <div className="skill">
-          <span>AWS</span> <span>70%</span>
-          <div className="bar"><div className="fill" style={{ width: "70%" }}></div></div>
-        </div>
-
+        {/* ══ KNOWLEDGE ══ */}
         <div className="section-title">Knowledge</div>
+        <div className="knowledge-block">
+          <ul className="knowledge-list">
+            {KNOWLEDGE.map((k) => (
+              <li key={k}>
+                <span className="check">✦</span>
+                {k}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-<ul className="knowledge-list">
-  <li>✔ Programming Fundamentals</li>
-  <li>✔ Object-Oriented Programming (OOP)</li>
-  <li>✔ REST API Development</li>
-  <li>✔ Database Management (SQL)</li>
-  <li>✔ Cloud Deployment Basics (AWS)</li>
-  <li>✔ Git & GitHub Usage</li>
-  <li>✔ Debugging & Problem Solving</li>
-</ul>
-
-      </div>
+      </aside>
     </>
   );
 };

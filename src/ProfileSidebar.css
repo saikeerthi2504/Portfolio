@@ -1,226 +1,507 @@
-/* Floating Profile Button */
+/* ═══════════════════════════════════════════════════════
+   PROFILESIDEBAR.CSS  —  Ch Sai Keerthi  |  Portfolio
+   Theme : Luxury Dark · Gold Ink · Drawer Panel
+   ═══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ─────────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────────── */
+:root {
+  --sb-bg:          #0b0917;
+  --sb-card:        rgba(18, 14, 36, 0.95);
+  --sb-border:      rgba(201, 168, 76, 0.20);
+  --sb-border-soft: rgba(255, 255, 255, 0.06);
+  --gold:           #c9a84c;
+  --gold-lite:      #e8cc7a;
+  --gold-glow:      rgba(201, 168, 76, 0.18);
+  --gold-dim:       rgba(201, 168, 76, 0.10);
+  --cream:          #f2ede3;
+  --cream-60:       rgba(242, 237, 227, 0.60);
+  --cream-35:       rgba(242, 237, 227, 0.35);
+  --muted:          #6b6180;
+  --green:          #34d399;
+  --tr:             0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  --sb-width:       360px;
+}
+
+/* ─────────────────────────────────────────────
+   FLOATING TRIGGER BUTTON
+───────────────────────────────────────────── */
 .profile-floating-btn {
   position: fixed;
-  background: linear-gradient(45deg, #e100ff, #00d0ff);
-  padding: 5px;
-  border: 3px solid #fff3;
-  border-radius: 50%;
-  color: white;
-  overflow: hidden;
-  /* top: 20px;
-  left: 20px;
-  width: 70px;
-  height: 70px;
-  
-  
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1000;
+
+  background: var(--gold);
+  color: #0b0917;
+  width: 42px;
+  height: 56px;
+  border-radius: 10px 0 0 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  
-  
-  z-index: 2000;
-  transition: 0.3s; */
+  letter-spacing: 0.02em;
+
+  box-shadow: -4px 0 20px rgba(201, 168, 76, 0.28);
+  transition: background var(--tr), width var(--tr), box-shadow var(--tr);
+
+  writing-mode: horizontal-tb;
 }
 
-.profile-floating-btn img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+.profile-floating-btn:hover {
+  background: var(--gold-lite);
+  width: 48px;
+  box-shadow: -6px 0 28px rgba(201, 168, 76, 0.40);
 }
 
-/* Sidebar Container */
+/* ─────────────────────────────────────────────
+   OVERLAY BACKDROP
+───────────────────────────────────────────── */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--tr);
+}
+
+.sidebar-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─────────────────────────────────────────────
+   SIDEBAR PANEL
+───────────────────────────────────────────── */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -400px; /* Hidden initially */
-  width: 350px;
-  height: 100%;
-  background: rgba(15, 18, 35, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 30px;
-  color: white;
-  transition: 0.4s ease;
-  z-index: 3000;
+  right: 0;
+  width: var(--sb-width);
+  height: 100vh;
+  z-index: 1002;
+
+  background: var(--sb-bg);
+  border-left: 1px solid var(--sb-border);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6);
+
   overflow-y: auto;
-  border-right: 1px solid #ffffff22;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-border) transparent;
+
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-family: 'Outfit', sans-serif;
 }
 
-/* When Open */
-.sidebar.open {
-  left: 0;
-}
+.sidebar::-webkit-scrollbar        { width: 4px; }
+.sidebar::-webkit-scrollbar-track  { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb  { background: var(--sb-border); border-radius: 4px; }
 
-/* Close Button */
+.sidebar.open { transform: translateX(0); }
+
+/* ─────────────────────────────────────────────
+   CLOSE BUTTON
+───────────────────────────────────────────── */
 .close-btn {
-  font-size: 30px;
-  background: none;
-  border: none;
-  color: white;
-  float: right;
+  position: sticky;
+  top: 0;
+  align-self: flex-end;
+  margin: 16px 16px 0 0;
+  z-index: 10;
+
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid var(--sb-border);
+  color: var(--gold);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  transition: background var(--tr), color var(--tr), transform var(--tr);
 }
 
-/* Profile Image Big */
+.close-btn:hover {
+  background: var(--gold);
+  color: var(--sb-bg);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ─────────────────────────────────────────────
+   PROFILE IMAGE
+───────────────────────────────────────────── */
 .profile-image-big {
-  width: 140px;
-  height: 140px;
-  margin: 20px auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Fixed height prevents rings from misaligning */
+  width: 100%;
+  height: 148px;
+  margin: 8px 0 22px;
+}
+
+/* Outer animated ring */
+.profile-image-big::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
-  padding: 5px;
-  background: linear-gradient(45deg, #e100ff, #00d0ff);
+  border: 1px solid var(--gold);
+  animation: ringPulse 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Inner decorative dashed ring */
+.profile-image-big::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px dashed rgba(201, 168, 76, 0.28);
+  z-index: 0;
 }
 
 .profile-image-big img {
-  width: 100%;
-  height: 100%;
+  /* Force exact circle dimensions */
+  width: 108px;
+  height: 108px;
+  min-width: 108px;
+  min-height: 108px;
+
   border-radius: 50%;
+
+  /* Fill the circle fully without distortion */
+  object-fit: cover;
+  object-position: center 15%;   /* shift slightly up to favor the face */
+
+  display: block;
+  flex-shrink: 0;
+
+  /* Gold border sits on top of the image */
+  outline: 2.5px solid var(--gold);
+  outline-offset: 0;
+  border: none;
+
+  /* Clip — ensures nothing bleeds outside the circle */
+  overflow: hidden;
+
+  filter: grayscale(8%) contrast(1.06) brightness(0.97);
+  position: relative;
+  z-index: 1;
+
+  box-shadow:
+    0 0 0 5px rgba(201, 168, 76, 0.10),
+    0 8px 28px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(201, 168, 76, 0.15);
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease, outline-color 0.35s ease;
 }
 
-h2 {
+.profile-image-big img:hover {
+  transform: scale(1.06);
+  outline-color: var(--gold-lite);
+  box-shadow:
+    0 0 0 6px rgba(201, 168, 76, 0.18),
+    0 12px 36px rgba(0, 0, 0, 0.6),
+    0 0 32px rgba(201, 168, 76, 0.28);
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1);    }
+  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.04); }
+}
+
+/* ─────────────────────────────────────────────
+   NAME & SUBTEXT
+───────────────────────────────────────────── */
+.sidebar h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cream);
   text-align: center;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+  padding: 0 20px;
 }
 
 .subtext {
+  font-size: 0.78rem;
+  color: var(--cream-60);
   text-align: center;
-  opacity: 0.8;
-  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  padding: 0 20px;
 }
 
-/* Section Titles */
+/* Status pill */
+.status-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 8px auto 0;
+  width: fit-content;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(52, 211, 153, 0.10);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.status-dot {
+  width: 5px; height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION DIVIDER
+───────────────────────────────────────────── */
+.sidebar-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--sb-border), transparent);
+  margin: 20px 0 0;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION TITLE
+───────────────────────────────────────────── */
 .section-title {
-  margin-top: 20px;
-  font-size: 18px;
-  border-bottom: 1px solid white;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 18px 20px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Contact rows */
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--sb-border), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT ROWS
+───────────────────────────────────────────── */
+.contact-block {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .row {
-  margin: 8px 0;
-  font-size: 14px;
-  opacity: 0.9;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--cream-60);
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--sb-border-soft);
+  transition: background var(--tr), border-color var(--tr);
 }
 
-/* Skill Bars */
+.row:hover {
+  background: var(--gold-dim);
+  border-color: var(--sb-border);
+}
+
+.row-icon {
+  color: var(--gold);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.row-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.row-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.row-value {
+  font-size: 0.77rem;
+  color: var(--cream-60);
+  word-break: break-all;
+}
+
+/* ─────────────────────────────────────────────
+   SKILL BARS
+───────────────────────────────────────────── */
+.skills-block {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
 .skill {
-  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.skill span {
-  display: inline-block;
-  width: 50%;
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--cream-60);
+  letter-spacing: 0.03em;
+}
+
+.skill-pct {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.05em;
 }
 
 .bar {
   width: 100%;
-  height: 6px;
-  background: #222;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 4px;
-  margin-top: 5px;
+  overflow: hidden;
 }
 
 .fill {
   height: 100%;
-  background: gold;
   border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lite));
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.45);
+  transform-origin: left;
+  animation: fillGrow 1s ease both;
 }
-/* Knowledge List */
+
+@keyframes fillGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ─────────────────────────────────────────────
+   KNOWLEDGE LIST
+───────────────────────────────────────────── */
+.knowledge-block {
+  padding: 0 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
 .knowledge-list {
-  margin-top: 10px;
-  padding-left: 10px;
   list-style: none;
-  margin-bottom: 60px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .knowledge-list li {
-  margin: 8px 0;
-  font-size: 15px;
-  opacity: 0.9;
   display: flex;
   align-items: center;
+  gap: 8px;
+  font-size: 0.77rem;
+  font-weight: 300;
+  color: var(--cream-60);
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--sb-border-soft);
+  line-height: 1.4;
+  transition: background var(--tr), border-color var(--tr), color var(--tr);
 }
 
-.knowledge-list li::before {
-  content: "• ";
-  color: gold;
-  font-size: 20px;
-  margin-right: 6px;
+.knowledge-list li:hover {
+  background: var(--gold-dim);
+  border-color: var(--sb-border);
+  color: var(--cream);
 }
 
-/* 📱 Tablets & Mobile */
-@media (max-width: 768px) {
-
-  /* Floating Profile Button */
-  .profile-floating-btn {
-    top: 15px;
-    left: 15px;
-    width: 55px;
-    height: 55px;
-    padding: 4px;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    width: 85%;           /* responsive width */
-    max-width: 320px;
-    padding: 20px;
-    left: -100%;          /* fully hidden */
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-
-  /* Profile Image */
-  .profile-image-big {
-    width: 110px;
-    height: 110px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  .subtext {
-    font-size: 13px;
-  }
-
-  .section-title {
-    font-size: 16px;
-  }
-
-  .row {
-    font-size: 13px;
-  }
-
-  .knowledge-list li {
-    font-size: 14px;
-  }
+.knowledge-list li .check {
+  color: var(--gold);
+  font-size: 0.65rem;
+  flex-shrink: 0;
 }
 
-/* 📱 Small Mobiles */
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
 @media (max-width: 480px) {
+  :root { --sb-width: 100vw; }
+  .sidebar h2 { font-size: 1.2rem; }
+  .profile-image-big img { width: 100px; height: 100px; }
+  .profile-image-big::before { width: 126px; height: 126px; }
+  .profile-image-big::after  { width: 113px; height: 113px; }
+}
 
-  .profile-floating-btn {
-    width: 50px;
-    height: 50px;
-  }
-
-  .sidebar {
-    width: 100%;      /* full screen sidebar */
-    max-width: 100%;
-    padding: 18px;
-  }
-
-  .profile-image-big {
-    width: 100px;
-    height: 100px;
-  }
-
-  .section-title {
-    font-size: 15px;
-  }
-
-  .knowledge-list li {
-    font-size: 13px;
-  }
+@media (max-width: 400px) {
+  :root { --sb-width: 100vw; }
+  .sidebar h2 { font-size: 1.1rem; }
 }
