@@ -33,17 +33,7 @@ function Home() {
       {/* ══════════════ HERO ══════════════ */}
       <section className="hero" ref={heroRef}>
 
-        {/* Photo */}
-        <div className="photo-wrapper">
-          <div className="photo-frame">
-            <img src="public/converted_image (1).jpg" alt="Ch Sai Keerthi" />
-            <span className="photo-bracket tl" />
-            <span className="photo-bracket tr" />
-            <span className="photo-bracket bl" />
-            <span className="photo-bracket br" />
-            <div className="photo-badge">Full Stack Dev</div>
-          </div>
-        </div>
+       
 
         {/* Text */}
         <div className="hero-content">
