@@ -36,7 +36,7 @@ function Home() {
         {/* Photo */}
         <div className="photo-wrapper">
           <div className="photo-frame">
-            <img src="/public/SAikeerthiProfilee.jpeg" alt="Ch Sai Keerthi" />
+            <img src="public/converted_image (1).jpg" alt="Ch Sai Keerthi" />
             <span className="photo-bracket tl" />
             <span className="photo-bracket tr" />
             <span className="photo-bracket bl" />
